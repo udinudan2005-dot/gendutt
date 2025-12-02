@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Belajar Salat • Bacaan • Zikir & Doa + Hadis Motivasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Remix Icon for modern icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :root{
+      --sky:#7ec8e3;              /* sky blue */
+      --sky-200:#cfefff;
+      --sky-300:#b8e3ff;
+      --sky-400:#97d6ff;
+      --plum:#8e4585;             /* plum */
+      --plum-600:#6e2f67;
+      --orange:#ff8c42;           /* orange */
+      --orange-600:#f97517;
+      --text:#0f172a;             /* slate-900 */
+      --muted:#475569;            /* slate-600 */
+      --white:#ffffff;
+      --card: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.35);
+      --shadow: 0 10px 25px rgba(0,0,0,.12);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; 
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: linear-gradient(135deg, var(--sky-200), var(--sky-400));
+      background-attachment: fixed;
+    }
+
+    /* App shell */
+    .app{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px clamp(16px, 4vw, 32px);
+    }
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:16px 18px;margin-bottom:18px;
+      background:linear-gradient( to right, rgba(255,255,255,.9), rgba(255,255,255,.75) );
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:48px;height:48px;border-radius:14px;
+      display:grid;place-items:center;
+      background: conic-gradient(from 210deg, var(--plum) 0 40%, var(--orange) 40% 70%, var(--sky) 70% 100%);
+      color:white; box-shadow: inset 0 0 8px rgba(255,255,255,.35);
+    }
+    h1{font-size:clamp(18px, 2.6vw, 24px);margin:0;line-height:1.15}
+    .subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+
+    .nav{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .tab-btn{
+      border:0; cursor:pointer; padding:10px 14px;
+      border-radius: 999px;
+      background: var(--glass);
+      color: #0b132b; font-weight:600;
+      box-shadow: 0 6px 12px rgba(0,0,0,.08);
+      display:flex; align-items:center; gap:8px;
+      transition: transform .06s ease, background .2s ease;
+    }
+    .tab-btn:is(:hover,:focus-visible){transform: translateY(-1px)}
+    .tab-btn.active{
+      background: linear-gradient(90deg, var(--plum), var(--orange));
+      color: white;
+    }
+
+    /* Hero / banner */
+    .hero{
+      position:relative;
+      padding: 18px; margin-bottom: 18px;
+      background: radial-gradient( 1200px 500px at 10% -10%, rgba(255,255,255,.65), rgba(255,255,255,.25) ),
+                  linear-gradient( to right, rgba(255,255,255,.6), rgba(255,255,255,.35) );
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-inner{display:grid; grid-template-columns: 1.3fr .7fr; gap:18px; align-items:center}
+    @media (max-width: 860px){ .hero-inner{ grid-template-columns: 1fr } }
+
+    .hero h2{ margin:.2rem 0 .4rem; font-size:clamp(20px, 3.4vw, 32px) }
+    .hero p{ margin:0; color:var(--muted)}
+
+    .cta{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+    .btn{border:0; cursor:pointer; padding:12px 16px; font-weight:700; border-radius:14px; box-shadow: var(--shadow); display:inline-flex; align-items:center; gap:8px}
+    .btn-primary{background: linear-gradient(90deg, var(--plum), var(--orange)); color:white}
+    .btn-ghost{background: rgba(255,255,255,.7)}
+
+    /* Section cards */
+    .grid{
+      display:grid; gap:16px; grid-template-columns: repeat(12, 1fr);
+    }
+    .col-12{grid-column: span 12}
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    .col-3{grid-column: span 3}
+    @media (max-width: 860px){ .col-6,.col-4,.col-3{ grid-column: span 12 } }
+
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card h3{margin:.25rem 0 .5rem}
+    .chip{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:12px; background:rgba(142,69,133,.12); color:var(--plum); font-weight:600 }
+    .chip.orange{ background: rgba(255,140,66,.14); color: var(--orange-600) }
+    .chip.sky{ background: rgba(126,200,227,.16); color: #0c5670 }
+
+    .illus{ position:absolute; right:-10px; bottom:-10px; width:160px; opacity:.25; filter: drop-shadow(0 6px 14px rgba(0,0,0,.12)); pointer-events:none }
+
+    /* Content sections */
+    section[role="tabpanel"]{ display:none }
+    section[role="tabpanel"].show{ display:block; animation: fade .25s ease }
+    @keyframes fade{ from {opacity:0; transform:translateY(4px)} to {opacity:1; transform:none} }
+
+    /* Lists and steps */
+    .steps{ display:grid; gap:12px }
+    .step{ display:grid; grid-template-columns: auto 1fr; gap:12px; align-items:start; background: rgba(255,255,255,.7); padding:12px; border-radius:14px }
+    .badge{ width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-weight:700; color:white; background: linear-gradient(180deg, var(--orange), var(--plum)) }
+
+    .dua{ background: rgba(255,255,255,.75); padding:12px 14px; border-radius:14px }
+    .arab{ font-size: 20px; line-height: 1.8; text-align: right }
+    .latin{ color:var(--muted); font-size: 14px }
+
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: rgba(0,0,0,.08); padding:2px 6px; border-radius:6px; font-size:12px }
+
+    /* Footer */
+    footer{ text-align:center; color:#1f2a44; padding:22px 10px; font-size:13px }
+
+    /* Floating tasbih widget */
+    .tasbih{
+      position: fixed; right: 16px; bottom: 16px; z-index: 20;
+      display:flex; gap:10px; align-items:center;
+      background: rgba(255,255,255,.9); border-radius:999px; padding:8px 10px; box-shadow: var(--shadow)
+    }
+    .tasbih .count{ min-width:46px; text-align:center; font-weight:700 }
+    .tasbih button{ border:0; padding:8px 10px; border-radius:999px; cursor:pointer; box-shadow: var(--shadow) }
+    .tasbih .inc{ background: linear-gradient(90deg, var(--plum), var(--orange)); color:white }
+    .tasbih .reset{ background: rgba(126,200,227,.25) }
+
+    /* Accessibility helpers */
+    a.skip{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
+    a.skip:focus{ position:static; width:auto; height:auto; padding:6px 8px; background:white; border-radius:8px }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#konten">Lewati ke konten</a>
+  <div class="app" id="app">
+
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <i class="ri-prayer-fill" style="font-size:26px"></i>
+        </div>
+        <div>
+          <h1>Panduan Salat • Zikir & Doa</h1>
+          <div class="subtitle"></div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Navigasi utama">
+        <button class="tab-btn active" data-tab="belajar"><i class="ri-guide-fill" aria-hidden="true"></i> Belajar Salat</button>
+        <button class="tab-btn" data-tab="bacaan"><i class="ri-book-open-fill" aria-hidden="true"></i> Bacaan Salat</button>
+        <button class="tab-btn" data-tab="zikir"><i class="ri-heart-2-fill" aria-hidden="true"></i> Zikir & Doa</button>
+        <button class="tab-btn" data-tab="hadis"><i class="ri-flashlight-fill" aria-hidden="true"></i> Hadis Motivasi</button>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <h2>Belajar ibadah dengan ringan & menyenangkan</h2>
+          <p>Aplikasi ini memandu gerakan, bacaan, serta zikir & doa setelah salat.</p>
+          <div class="cta"
+          </div>        <!-- Friendly SVG Illustration -->
+        <svg class="illus" viewBox="0 0 240 240" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--sky)"/>
+              <stop offset="100%" stop-color="var(--orange)"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#g1)">
+            <circle cx="60" cy="120" r="42" opacity=".9"/>
+            <rect x="110" y="90" width="90" height="60" rx="14" opacity=".85"/>
+            <circle cx="175" cy="160" r="22" opacity=".8"/>
+            <circle cx="120" cy="50" r="16" opacity=".6"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <main id="konten" class="grid" role="tablist" aria-live="polite">
+
+      <!-- Belajar Salat -->
+      <section id="tab-belajar" role="tabpanel" class="col-12 show">
+        <div class="card">
+          <div class="chip sky"><i class="ri-compass-3-fill"></i> Panduan langkah demi langkah</div>
+          <h3>Belajar Salat: Gerakan Inti</h3>
+          <p class="subtitle">Ikuti urutan ringkas untuk salat fardu. Setiap langkah memiliki tips singkat.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="badge">1</div>
+              <div>
+                <strong>Niat & Takbiratul Ihram</strong>
+                  <img src="niat.png" width="150px" height="200px">
+                <div class="latin">Niat di dalam hati sesuai salat yang dikerjakan. Angkat kedua tangan sejajar telinga sambil mengucap <em>Allāhu Akbar</em>.</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">2</div>
+              <div>
+                <strong>Berdiri (Qiyām) membaca iftitah & Membaca Al-Fātiḥah</strong>
+                <img src="akbar.png" width="150px" height="400px">
+                <div class="latin">Baca iftitah dan Al-Fātiḥah lalu surat pendek. Pastikan arah kiblat dan ketenangan (ṭumaʼnīnah).</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">3</div>
+              <div>
+                <strong>Rukuk</strong>
+                 <img src="rukuk2.png" width="200px" height="300px">
+                <div class="latin">Punggung rata, tangan di lutut. Ucapkan <em>Subḥāna rabbiyal ‘aẓīmi wabhihamdhi</em> (3×).</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">4</div>
+              <div>
+                <strong>I‘tidal</strong>
+                 <img src="itidal2.png" width="200px" height="400px">
+                <div class="latin">Bangun dari rukuk sambil mengucap <em>Sami‘allāhu liman ḥamidah</em>, kemudian <em>Rabbanā lakal-ḥamdu milushamati wamilulardhi wamilumashitta minsainbad'u</em>.</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">5</div>
+              <div>
+                <strong>Sujud</strong>
+                 <img src="sujud2.png" width="150px" height="200px">
+                <div class="latin">Tempelkan tujuh anggota sujud. Ucapkan <em>Subḥāna rabbiyal a‘lā wabhihamdhi</em> (3×).</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">6</div>
+              <div>
+                <strong>Duduk di antara dua sujud</strong>
+                  <img src="duasujud.png" width="150px" height="300px">
+               
+                <div class="latin">Baca <em>Rabbi-ighfir lī, warḥamnī, wajburnī, warfa‘nī, warzuqnī, wahdinī, wa‘āfinī, wa‘fu ‘annī</em>.</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">7</div>
+              <div>
+                <strong>Tasyahhud & Salam</strong>
+                 <img src="salam2.png" width="150px" height="300px">
+                <div class="latin">Baca tasyahhud. Tutup salat dengan salam ke kanan dan kiri.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- panduan shalat -->
+      <section id="tab-bacaan" role="tabpanel" class="col-12">
+        <div class="card">
+          <div class="chip orange"><i class="ri-book-3-fill"></i> Teks Arab • Latin • Arti</div>
+          <h3>Bacaan Salat Pilihan</h3>
+
+          <article class="dua" aria-label="Doa Iftitah">
+            <div class="chip sky">Iftitah</div>
+            <div class="arab"></div>
+
+
+<center>
+  
+ <video width="270" controls>
+    <source src="vidioiftitah.mp4" type="video/mp4">
+  </video>
+  </center>
+  
+
+
+            <div class="latin"<:>
+</div>
+            <div class="latin"><span class="kbd"></span></div>
+          </article>
+
+          <article class="dua" aria-label="Rukuk">
+            <div class="chip sky">Rukuk</div>
+            <div class="arab">
+
+
+
+          
+
+   <video width="270" controls>
+    <source src="vidiorukuk.mp4" type="video/mp4">
+  </video>
+ <div class="latin"<:>
+</div>
+            <div class="latin"><span class="kbd"></span></div>
+          </article>
+
+          <article class="dua" aria-label="I'tidal">
+            <div class="chip sky">I‘tidal</div>
+            <div class="arab">
+
+  <video width="270" controls>
+    <source src="vidioitidal.mp4" type="video/mp4">
+  </video>
+ <div class="latin"<:>
+</div>
+            <div class="latin"><span class="kbd"></span></div>
+          </article>
+
+          <article class="dua" aria-label="Sujud">
+            <div class="chip sky">Sujud</div>
+           <div class="latin"> 
+           </div>
+          </article>
+
+   <video width="270" controls>
+    <source src="vidiosujud.mp4" type="video/mp4">
+  </video>
+
+          <article class="dua" aria-label="Duduk di antara dua sujud">
+            <div class="chip sky">Duduk di antara dua sujud</div>
+            
+            <div class="latin"></div>
+          </article>
+
+   <video width="270" controls>
+    <source src="vidio2sujud.mp4" type="video/mp4">
+  </video>
+
+          <article class="dua" aria-label="Tasyahhud Akhir">
+            <div class="chip sky">Tasyahhud</div>
+          
+            <div class="latin">
+</div>
+          </article>
+           <video width="270" controls>
+    <source src="vidioakhir.mp4" type="video/mp4">
+  </video>
+               
+        </div>
+      </section>
+
+      <!-- Zikir & Doa -->
+      <section id="tab-zikir" role="tabpanel" class="col-12">
+        <div class="card">
+          <div class="chip sky"><i class="ri-heart-fill"></i> Zikir & Doa Setelah Salat</div>
+          <h3>Zikir & Doa</h3>
+          <p class="subtitle">Rangkaian zikir ringkas setelah salam.</p>
+
+          <div class="dua">
+            <div class="chip orange">Istighfar (3×)</div>
+            <div class="arab">أَسْتَغْفِرُ اللّٰهَ • أَسْتَغْفِرُ اللّٰهَ • أَسْتَغْفِرُ اللّٰهَ</div>
+          </div> 
+         
+          <div class="dua">
+            <div class="chip orange">Ayat Kursi</div>
+            <div class="latin">Bacakan Ayat Kursi (QS. Al-Baqarah: 255).
+           </div>
+           
+اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+
+Allāhu lā ilāha illā huwa al-ḥayyu al-qayyūm, lā ta’khudzuhu sinatun wa lā nawm, lahu mā fis-samāwāti wa mā fil-arḍ, man dhalladhī yashfa‘u ‘indahu illā bi’idhnih, ya‘lamu mā baina aydīhim wa mā khalfahum, wa lā yuḥīṭūna bishai’im min ‘ilmihī illā bimā shā’, wasi‘a kursiyyuhus-samāwāti wal-arḍ, wa lā ya’ūduhū ḥifẓuhumā, wa huwa al-‘aliyyul-‘aẓīm.
+Artinya 
+“Allah, tidak ada Tuhan (yang berhak disembah) melainkan Dia, Yang Maha Hidup, Yang terus menerus mengurus (makhluk-Nya); tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang di langit dan di bumi. Tiada yang dapat memberi syafa’at di sisi-Nya tanpa izin-Nya. Dia mengetahui apa-apa yang di hadapan mereka dan di belakang mereka, dan mereka tidak mengetahui sesuatu pun dari ilmu-Nya melainkan apa yang Dia kehendaki. Kursi-Nya meliputi langit dan bumi. Dan Dia tidak merasa berat memelihara keduanya, dan Dia Maha Tinggi lagi Maha Besar.”
+          </div>
+
+          <div class="dua">
+            <div class="chip orange">Tasbih • Tahmid • Takbir (33×)</div>
+            <div class="latin">Subḥānallāh (33×), Alḥamdulillāh (33×), Allāhu Akbar (33×), lalu sempurnakan dengan <em>Lā ilāha illallāhu waḥdahū lā syarīka lah ...</em></div>
+          </div>
+
+          <div class="dua">
+            <div class="chip orange">Doa Penutup</div>
+            <div class="arab"></div> 
+اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ، حَمْدًا يُوَافِي نِعَمَهُ وَيُكَافِئُ مَزِيْدَهُ، يَا رَبَّنَا لَكَ الْحَمْدُ كَمَا يَنْبَغِيْ لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ. اَللّٰهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِهِ وَأَصْحَابِهِ أَجْمَعِيْنَ.
+اَللّٰهُمَّ اغْفِرْ لَنَا ذُنُوْبَنَا وَلِوَالِدِيْنَا وَارْحَمْهُمْ كَمَا رَبَّوْنَا صِغَارًا، وَلِمَشَايِخِنَا وَلِمَنْ لَهُ حَقٌّ عَلَيْنَا، وَلِلْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ، وَالْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ، الْأَحْيَاءِ مِنْهُمْ وَالْأَمْوَاتِ.
+اَللّٰهُمَّ اجْعَلْنَا مُقِيْمِي الصَّلَاةِ وَمِنْ ذُرِّيَّاتِنَا رَبَّنَا وَتَقَبَّلْ دُعَاء. رَبَّنَا اغْفِرْ لِيْ وَلِوَالِدَيَّ وَلِلْمُؤْمِنِيْنَ يَوْمَ يَقُوْمُ الْحِسَابُ.
+رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ.
+وَصَلَّى اللّٰهُ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلَّمَ، سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ، وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ.</div>
+            <div class="latin">Segala puji bagi Allah, Tuhan semesta alam. Pujian yang sesuai dengan nikmat-Nya dan menambah karunia-Nya. Wahai Tuhan kami, bagi-Mu segala puji sebagaimana layak untuk kebesaran wajah-Mu dan keagungan kekuasaan-Mu. Ya Allah, limpahkanlah rahmat, salam, dan keberkahan kepada junjungan kami Nabi Muhammad, keluarga, dan para sahabat beliau seluruhnya.
+Ya Allah, ampunilah dosa-dosa kami, dosa kedua orang tua kami, sayangilah mereka sebagaimana mereka menyayangi kami di waktu kecil. Ampunilah guru-guru kami, orang-orang yang mempunyai hak atas kami, kaum mukminin dan mukminat, kaum muslimin dan muslimat, yang masih hidup maupun yang telah wafat.
+Ya Allah, jadikanlah kami orang yang mendirikan salat, begitu pula anak keturunan kami. Ya Tuhan kami, kabulkanlah doa kami. Ya Tuhan kami, ampunilah aku, kedua orang tuaku, dan seluruh kaum mukmin pada hari perhitungan.
+Ya Tuhan kami, berilah kami kebaikan di dunia, kebaikan di akhirat, dan lindungilah kami dari siksa neraka.
+Semoga Allah senantiasa melimpahkan rahmat kepada Nabi Muhammad, keluarga, dan sahabat beliau. Maha Suci Tuhanmu, Tuhan Yang Maha Mulia dari sifat yang mereka katakan. Selamat sejahtera bagi para rasul. Segala puji bagi Allah, Tuhan semesta alam. .</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hadis Motivasi -->
+      <section id="tab-hadis" role="tabpanel" class="col-12">
+        <div class="card">
+          <div class="chip sky"><i class="ri-lightbulb-flash-fill"></i> Hadis untuk Motivasi Rajin Salat</div>
+          <h3>Hadis Motivasi</h3>
+          <p class="subtitle">Beberapa hadis sahih yang mendorong kita menjaga salat.</p>
+
+          <article class="dua" aria-label="Hadis Salat pada waktunya">
+            <div class="chip">Amalan paling utama</div>
+            <div class="arab">سُئِلَ النَّبِيُّ ﷺ أَيُّ الْعَمَلِ أَفْضَلُ؟ قَالَ: «الصَّلَاةُ لِوَقْتِهَا»</div>
+            <div class="latin"><strong>Terjemah:</strong> Nabi ﷺ ditanya: "Amalan apakah yang paling utama?" Beliau menjawab: <em>Salat pada waktunya</em>. <em>(HR. al-Bukhārī & Muslim)</em></div>
+          </article>
+
+          <article class="dua" aria-label="Hadis Shalat adalah cahaya">
+            <div class="chip">Salat itu cahaya</div>
+            <div class="arab">وَالصَّلَاةُ نُورٌ</div>
+            <div class="latin"><strong>Terjemah:</strong> "Salat adalah cahaya." <em>(HR. Muslim)</em></div>
+          </article>
+
+          <article class="dua" aria-label="Hadis Amal yang konsisten">
+            <div class="chip">Istikamah</div>
+            <div class="arab">أَحَبُّ الأَعْمَالِ إِلَى اللّٰهِ أَدْوَمُهَا وَإِنْ قَلَّ</div>
+            <div class="latin"><strong>Terjemah:</strong> "Amal yang paling dicintai Allah adalah yang paling kontinu, walaupun sedikit." <em>(HR. al-Bukhārī & Muslim)</em></div>
+          </article>
+                    <article class="dua" aria-label=" Shalat sebagai tiang agama">
+            <div class="chip">Salat tiang agama</div>
+            <div class="arab">
+النَّبِيُّ ﷺ قَالَ: اَلصَّلَاةُ عِمَادُ الدِّينِ</div>
+            <div class="latin"><strong>Terjemah:</strong>  Nabi ﷺ bersabda: “Shalat adalah tiang agama.”
+(HR. Baihaqi)." <em></em></div>
+         
+          </article>
+          <article class="dua" aria-label=" iman dan kufur">
+            <div class="chip">iman dan kufur</div>
+            <div class="arab">
+
+إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ الصَّلاَةِ</div>
+            <div class="latin"><strong>Terjemah:</strong>  “Sesungguhnya pembatas antara seorang hamba dengan kesyirikan dan kekufuran adalah meninggalkan shalat.”
+." <em>(HR. Muslim)</em></div>
+          </article>
+          
+           <article class="dua" aria-label=" menghapus dosa">
+            <div class="chip">menghapus dosa</div>
+            <div class="arab">
+
+الصَّلَوَاتُ الْخَمْسُ، وَالْجُمُعَةُ إِلَى الْجُمُعَةِ، كَفَّارَةٌ لِمَا بَيْنَهُنَّ</div>
+            <div class="latin"><strong>Terjemah:</strong>  Nabi ﷺ bersabda: “shalat lima waktu dan Jum’at ke Jum’at berikutnya adalah penghapus dosa di antara keduanya.”
+
+(" <em>(HR. Muslim)</em></div>
+         </article>
+              <article class="dua" aria-label="wadiat terakhir nabi">
+            <div class="chip">wasiat terakhir nabi</div>
+            <div class="arab">
+اَلصَّلَاةَ اَلصَّلَاةَ وَمَا مَلَكَتْ أَيْمَانُكُمْ</div>
+            <div class="latin"><strong>Terjemah:</strong>  “Jagalah shalat, jagalah shalat, dan (perhatikan) orang-orang yang lemah di antara kalian.”
+(HR. Abu Dawud) <em></em></div>
+          </article>
+                   <article class="dua" aria-label="shalat penghapus kesalahan">
+            <div class="chip">Salat penghapus kesalahan</div>
+            <div class="arab">
+أَرَأَيْتُمْ لَوْ أَنَّ نَهْرًا بِبَابِ أَحَدِكُمْ، يَغْتَسِلُ فِيهِ كُلَّ يَوْمٍ خَمْسًا، هَلْ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ؟ قَالُوا: لاَ. قَالَ: فَذَلِكَ مَثَلُ الصَّلَوَاتِ الْخَمْسِ</div>
+            <div class="latin"><strong>Terjemah:</strong>  “Bayangkan jika di depan rumah kalian ada sungai dan kalian mandi di dalamnya lima kali sehari, apakah masih ada kotoran tersisa? Mereka menjawab: Tidak. Beliau bersabda: Demikianlah perumpamaan shalat lima waktu.”
+(HR. Bukhari & Muslim)." <em></em></div>
+          </article>
+                   <article class="dua" aria-label="pembeda orang munafik">
+            <div class="chip">pembeda orang munafik</div>
+            <div class="arab">
+إِنَّ أَثْقَلَ الصَّلَاةِ عَلَى الْمُنَافِقِينَ صَلَاةُ الْعِشَاءِ وَصَلَاةُ الْفَجْرِ</div>
+            <div class="latin"><strong>Terjemah:</strong>  “Sesungguhnya shalat yang paling berat bagi orang munafik adalah shalat Isya dan shalat Subuh.”." <em>(HR. Muslim)</em></div>
+          </article>
+                    <article class="dua" aria-label="Hadis  shlat menjaga dari neraka">
+            <div class="chip">Salat menjaga dari neraka</div>
+            <div class="arab">
+مَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُورًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ</div>
+            <div class="latin"><strong>Terjemah:</strong> “Barangsiapa menjaga shalat, maka shalat akan menjadi cahaya, bukti, dan keselamatan baginya pada hari kiamat.”
+ <em>(HR. Ahmad)</em></div>
+          </article>
+                   <article class="dua" aria-label="Hadis Shalat sebagai penebus dosa">
+            <div class="chip">Salat sebagai penebus dosa</div>
+            <div class="arab">
+مَا مِنِ امْرِئٍ مُسْلِمٍ تُصِيبُهُ صَلاَةٌ مَكْتُوبَةٌ فَيُحْسِنُ وُضُوءَهَا وَخُشُوعَهَا وَرُكُوعَهَا، إِلاَّ كَانَتْ كَفَّارَةً لِمَا قَبْلَهَا</div </div>
+            <div class="latin"><strong>Terjemah:</strong> ". “Tidaklah seorang Muslim melakukan shalat wajib, memperbagus wudhu, khusyuk, dan rukuknya, kecuali menjadi penebus dosa-dosa sebelumnya.”
+(HR. Muslim)" <em></em></div>
+          </article>
+                   
+
+          <p class="subtitle">Catatan: Ringkasan teks Arab & terjemah di atas disajikan singkat untuk tujuan belajar dan motivasi.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Dibuat untuk belajar — warna ceria (sky blue • plum • orange), desain responsif & ramah pengguna.
+    </footer>
+
+    <!-- Floating Tasbih Counter -->
+    <div class="tasbih" aria-live="polite" title="Tasbih cepat: klik tambah untuk menghitung zikir">
+      <span class="count" id="tasbihCount">0</span>
+      <button class="inc" id="tasbihInc" aria-label="Tambah hitungan"><i class="ri-add-circle-fill"></i></button>
+      <button class="reset" id="tasbihReset" aria-label="Reset hitungan"><i class="ri-refresh-line"></i></button>
+    </div>
+
+  </div><!-- /app -->
+
+  <script>
+const videos = document.querySelectorAll("video");
+    videos.forEach(video => {
+      video.addEventListener("play", () => {
+        videos.forEach(v => {
+          if (v !== video) v.pause();
+        });
+      });
+    });
+    // Simple SPA tab switcher
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = {
+      belajar: document.getElementById('tab-belajar'),
+      bacaan: document.getElementById('tab-bacaan'),
+      zikir: document.getElementById('tab-zikir'),
+      hadis: document.getElementById('tab-hadis'),
+    };
+    function activate(tab){
+      tabs.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+      Object.entries(panels).forEach(([k, el]) => el.classList.toggle('show', k === tab));
+      // Remember last tab
+      try{ localStorage.setItem('lastTab', tab) }catch(e){}
+    }
+    tabs.forEach(b=> b.addEventListener('click', ()=> activate(b.dataset.tab)) );
+    document.querySelectorAll('[data-tab-jump]')
+      .forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.tabJump)));
+    // Restore last tab
+    const saved = (localStorage.getItem('lastTab')||'belajar');
+    activate(saved);
+
+    // Tasbih counter
+    const cEl = document.getElementById('tasbihCount');
+    const inc = document.getElementById('tasbihInc');
+    const rst = document.getElementById('tasbihReset');
+    let count = parseInt(localStorage.getItem('tasbih')||'0',10);
+    function render(){ cEl.textContent = count; localStorage.setItem('tasbih', String(count)); }
+    render();
+    inc.addEventListener('click', ()=> { count++; render(); });
+    rst.addEventListener('click', ()=> { count = 0; render(); });
+
+    // Keyboard accessibility for fast nav
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'b'){ activate('belajar'); }
+      if(e.key.toLowerCase() === 'c'){ activate('bacaan'); }
+      if(e.key.toLowerCase() === 'z'){ activate('zikir'); }
+      if(e.key.toLowerCase() === 'h'){ activate('hadis'); }
+    });
+  </script>
+</body>
+</html>
